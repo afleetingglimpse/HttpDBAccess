@@ -1,11 +1,12 @@
 package org.dbaccess.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Objects;
 
 @Entity
+@Table(name = "vacancies")
 public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,5 +32,27 @@ public class Vacancy {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    @Override
+    public String toString() {
+        return "Vacancy{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vacancy vacancy = (Vacancy) o;
+        return Objects.equals(name, vacancy.name) && Objects.equals(link, vacancy.link);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, link);
     }
 }
