@@ -21,8 +21,7 @@ public class VacancyController {
     @GetMapping(value = "/")
     private ResponseEntity<List<Vacancy>> getAllVacancies() {
         LOGGER.info("GET / request received");
-        List<Vacancy> vacancyList = vacancyService.readALl();
-        vacancyList.forEach(System.out::println);
+        List<Vacancy> vacancyList = vacancyService.readAll();
         return new ResponseEntity<>(vacancyList, HttpStatus.OK);
     }
 
@@ -30,7 +29,6 @@ public class VacancyController {
     private ResponseEntity<Vacancy> createVacancy(@RequestBody Vacancy vacancy) {
         LOGGER.info("POST / request received");
         LOGGER.info(vacancy.toString());
-
         vacancyService.create(vacancy);
         return new ResponseEntity<>(vacancy, HttpStatus.CREATED);
     }
@@ -43,4 +41,19 @@ public class VacancyController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(vacancy, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/{id}")
+    private ResponseEntity<Vacancy> deleteVacancy(@PathVariable int id) {
+        LOGGER.info("POST /{id} request received");
+        vacancyService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/clear")
+    private ResponseEntity<Vacancy> deleteAll() {
+        LOGGER.info("POST /clear request received");
+        vacancyService.deleteAll();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

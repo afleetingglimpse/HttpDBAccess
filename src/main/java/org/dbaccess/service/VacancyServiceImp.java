@@ -26,7 +26,7 @@ public class VacancyServiceImp implements VacancyService {
     }
 
     @Override
-    public List<Vacancy> readALl() {
+    public List<Vacancy> readAll() {
         return vacancyRepository.findAll();
     }
 
@@ -36,7 +36,12 @@ public class VacancyServiceImp implements VacancyService {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
+    public void delete(int id) {
+        vacancyRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteAll() {
+        vacancyRepository.deleteAll();
     }
 }

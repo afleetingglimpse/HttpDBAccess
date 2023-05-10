@@ -10,9 +10,11 @@ public interface VacancyService {
 
     Vacancy read(int id);
 
-    List<Vacancy> readALl();
+    List<Vacancy> readAll();
 
     boolean update(Vacancy vacancy, int id);
 
-    boolean delete(int id);
+    void delete(int id);
+
+    void deleteAll();
 }
